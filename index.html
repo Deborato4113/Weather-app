@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Forecast App</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body id="appBody">
+    <!-- Animated canvas background -->
+    <canvas id="weatherCanvas"></canvas>
+
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <h1>Weather Forecast</h1>
+            <p>Real-time weather, AQI & hourly forecast for any city</p>
+        </header>
+
+        <!-- Search + location -->
+        <div class="search-row">
+            <div class="search-box">
+                <input type="text" id="cityInput" placeholder="Enter city name..." />
+                <div id="autocompleteBox" class="autocomplete-box hidden"></div>
+
+                <button id="searchBtn">Search</button>
+                <button id="locBtn" class="loc-btn" title="Use my location">📍</button>
+            </div>
+
+            <!-- Dark / light toggle -->
+            <div class="mode-toggle">
+                <label class="switch">
+                </label>
+                
+            </div>
+        </div>
+
+        <!-- Error -->
+        <div id="errorMessage" class="error-message"></div>
+
+        <!-- Current Weather -->
+        <section id="currentWeather" class="current-weather card hidden"></section>
+
+        <!-- Hourly Forecast -->
+        <section id="hourly" class="hourly-section card hidden"></section>
+
+        <!-- 5-Day Forecast -->
+        <section id="forecast" class="forecast-container hidden"></section>
+
+        <!-- AQI -->
+        <section id="aqiBox" class="aqi-box card hidden"></section>
+
+        <!-- Alerts -->
+        <section id="alertsBox" class="alerts-box card hidden"></section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
