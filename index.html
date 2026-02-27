@@ -1,60 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Weather Forecast App</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ATMOS — Weather Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@200;300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
 </head>
+<body>
 
-<body id="appBody">
-    <!-- Animated canvas background -->
-    <canvas id="weatherCanvas"></canvas>
+  <!-- Animated background canvas -->
+  <canvas id="bgCanvas"></canvas>
+  <!-- Cinematic vignette overlay -->
+  <div class="vignette"></div>
 
-    <div class="container">
-        <!-- Header -->
-        <header>
-            <h1>Weather Forecast</h1>
-            <p>Real-time weather, AQI & hourly forecast for any city</p>
-        </header>
+  <!-- Top loading bar -->
+  <div id="loadingBar"></div>
 
-        <!-- Search + location -->
-        <div class="search-row">
-            <div class="search-box">
-                <input type="text" id="cityInput" placeholder="Enter city name..." />
-                <div id="autocompleteBox" class="autocomplete-box hidden"></div>
+  <!-- Error toast -->
+  <div id="errorMsg"></div>
 
-                <button id="searchBtn">Search</button>
-                <button id="locBtn" class="loc-btn" title="Use my location">📍</button>
-            </div>
+  <!-- ── TOP NAVIGATION ── -->
+  <nav class="topbar">
+    <div class="logo">ATM<span>OS</span></div>
 
-            <!-- Dark / light toggle -->
-            <div class="mode-toggle">
-                <label class="switch">
-                </label>
-                
-            </div>
-        </div>
-
-        <!-- Error -->
-        <div id="errorMessage" class="error-message"></div>
-
-        <!-- Current Weather -->
-        <section id="currentWeather" class="current-weather card hidden"></section>
-
-        <!-- Hourly Forecast -->
-        <section id="hourly" class="hourly-section card hidden"></section>
-
-        <!-- 5-Day Forecast -->
-        <section id="forecast" class="forecast-container hidden"></section>
-
-        <!-- AQI -->
-        <section id="aqiBox" class="aqi-box card hidden"></section>
-
-        <!-- Alerts -->
-        <section id="alertsBox" class="alerts-box card hidden"></section>
+    <div class="search-pill">
+      <input type="text" id="cityInput" placeholder="Search any city worldwide…" autocomplete="off" />
+      <button class="btn-loc" id="locBtn" title="Use GPS">📍</button>
+      <button class="btn-search" id="searchBtn">GO</button>
+      <div id="autoBox" class="hidden"></div>
     </div>
 
-    <script src="script.js"></script>
+    <div class="nav-right">
+      <div class="live-chip">
+        <div class="live-dot"></div>
+        <span id="liveTime">—</span>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ── SPLASH SCREEN ── -->
+  <div id="splash">
+    <div class="splash-title">ATMOS</div>
+    <div class="splash-sub">Weather Intelligence</div>
+    <div class="splash-hint">Search any city to begin</div>
+  </div>
+
+  <!-- ── MAIN APP LAYOUT ── -->
+  <div id="app">
+
+    <!-- Hero Panel (left) -->
+    <div class="hero">
+      <div class="hero-icon-wrap">
+        <img id="heroIcon" src="" alt="Weather icon" />
+      </div>
+      <div class="hero-city"  id="heroCity"></div>
+      <div class="hero-country" id="heroCountry"></div>
+      <div class="hero-temp-row">
+        <div class="hero-temp" id="heroTemp">—</div>
+        <div class="hero-temp-unit">°C</div>
+        <div class="hero-desc-col">
+          <div class="hero-desc"   id="heroDesc"></div>
+          <div class="hero-feels"  id="heroFeels"></div>
+          <div class="hero-minmax" id="heroMM"></div>
+        </div>
+      </div>
+      <div class="stats-strip" id="statStrip"></div>
+      <div class="sun-row"    id="sunRow"></div>
+      <div class="hero-date"  id="heroDate"></div>
+    </div>
+
+    <!-- Sidebar (right) -->
+    <div class="sidebar">
+      <div class="s-sec">
+        <div class="s-label">Conditions</div>
+        <div class="gauge-grid" id="gaugeGrid"></div>
+      </div>
+      <div class="s-sec">
+        <div class="s-label">Air Quality</div>
+        <div id="aqiBlock"></div>
+      </div>
+      <div class="s-sec">
+        <div class="s-label">Hourly</div>
+        <div class="hourly-row" id="hourlyRow"></div>
+      </div>
+      <div class="s-sec">
+        <div class="s-label">5-Day Forecast</div>
+        <div class="day-list" id="dayList"></div>
+      </div>
+      <div class="s-sec" id="alertsSec" style="display:none">
+        <div class="s-label">Alerts</div>
+        <div id="alertCard"></div>
+      </div>
+    </div>
+
+  </div><!-- /#app -->
+
+  <!-- ── BOTTOM LIVE TICKER ── -->
+  <div class="bottom-ticker" id="ticker">
+    <div class="ticker-label">LIVE</div>
+    <div class="ticker-track">
+      <div class="ticker-inner" id="tickerInner"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
